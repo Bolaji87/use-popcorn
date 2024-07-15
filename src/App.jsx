@@ -1,6 +1,10 @@
 import { useState } from "react";
-import Header from "./components/header";
+import Header from "./components/header/header.jsx";
 import Main from "./components/Main";
+
+import Logo from "./components/header/Logo.jsx";
+import Search from "./components/header/Search.jsx";
+import NumResults from "./components/header/NumResults.jsx";
 
 const tempMovieData = [
   {
@@ -64,7 +68,11 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <Header>
+        <Logo />
+        <Search />
+        <NumResults movies={movies} />
+      </Header>
       <Main
         isOpen1={isOpen1}
         setIsOpen1={setIsOpen1}
