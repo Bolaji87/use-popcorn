@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Header from "./components/header/header.jsx";
-import Main from "./components/Main";
+import Main from "./components/main/Main.jsx";
 
 import Logo from "./components/header/Logo.jsx";
 import Search from "./components/header/Search.jsx";
 import NumResults from "./components/header/NumResults.jsx";
+
+import ListBox from "./components/main/ListBox.jsx";
+import WatchedBox from "./components/main/WatchedBox.jsx";
 
 const tempMovieData = [
   {
@@ -73,19 +76,19 @@ export default function App() {
         <Search />
         <NumResults movies={movies} />
       </Header>
-      <Main
-        isOpen1={isOpen1}
-        setIsOpen1={setIsOpen1}
-        isOpen2={isOpen2}
-        setIsOpen2={setIsOpen2}
-        watched={watched}
-        setWatched={setWatched}
-        movies={movies}
-        setMovies={setMovies}
-        avgRuntime={avgRuntime}
-        avgImdbRating={avgImdbRating}
-        avgUserRating={avgUserRating}
-      />
+
+      <Main>
+        <ListBox movies={movies} isOpen1={isOpen1} setIsOpen1={setIsOpen1} />
+        <WatchedBox
+          isOpen2={isOpen2}
+          setIsOpen2={setIsOpen2}
+          watched={watched}
+          setWatched={setWatched}
+          avgUserRating={avgUserRating}
+          avgRuntime={avgRuntime}
+          avgImdbRating={avgImdbRating}
+        />
+      </Main>
     </>
   );
 }
