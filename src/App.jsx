@@ -1,17 +1,16 @@
 import { useState } from "react";
-import Header from "./components/header/header.jsx";
-import Main from "./components/main/Main.jsx";
 
+import Header from "./components/header/header.jsx";
 import Logo from "./components/header/Logo.jsx";
 import Search from "./components/header/Search.jsx";
 import NumResults from "./components/header/NumResults.jsx";
 
+import Main from "./components/main/Main.jsx";
 import Box from "./components/main/Box.jsx";
 
 import MovieList from "./components/main/MovieList.jsx";
 import WatchedBoxSummary from "./components/main/WatchedBoxSummary.jsx";
 import WatchedList from "./components/main/WatchedList .jsx";
-import WatchedBox from "./components/main/WatchedBox.jsx";
 
 const tempMovieData = [
   {
@@ -64,8 +63,6 @@ export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
 
-  // const [isOpen2, setIsOpen2] = useState(true);
-
   return (
     <>
       <Header>
@@ -75,6 +72,16 @@ export default function App() {
       </Header>
 
       <Main>
+        {/* <Box element={<MovieList movies={movies} />} />
+        <Box
+          element={
+            <>
+              <WatchedBoxSummary watched={watched} />
+              <WatchedList watched={watched} />
+            </>
+          }
+        /> */}
+
         <Box>
           <MovieList movies={movies} />
         </Box>
