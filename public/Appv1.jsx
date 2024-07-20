@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Header from "./components/header/header.jsx";
 import Logo from "./components/header/Logo.jsx";
@@ -58,42 +58,10 @@ const tempWatchedData = [
     userRating: 9,
   },
 ];
-const KEY = "7b1a62ea";
 
 export default function App() {
-  const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  // vanilla dot .then method 👇🏻
-  // useEffect(function () {
-  //   fetch(
-  //     ` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=interstellar`
-  //   ).then((res) => res.json().then((data) => setMovies(data.Search)));
-  // }, []);
-
-  //  Aysnc function 👇🏻
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          ` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=interstellar`
-        );
-        if (!response.ok)
-          throw new Error("something went wrong with fetching movies");
-        const data = await response.json();
-        setMovies(data.Search);
-      } catch (err) {
-        console.error(err.message);
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchMovies();
-  }, []);
+  const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
 
   return (
     <>
@@ -115,10 +83,7 @@ export default function App() {
         /> */}
 
         <Box>
-          {/* {isLoading ? <Loader /> : <MovieList movies={movies} />} */}
-          {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList movies={movies} />}
-          {error && <ErrorMessage message={error} />}
+          <MovieList movies={movies} />
         </Box>
 
         <Box>
@@ -127,17 +92,5 @@ export default function App() {
         </Box>
       </Main>
     </>
-  );
-}
-
-function Loader() {
-  return <p className="loader">Loading...</p>;
-}
-
-function ErrorMessage({ message }) {
-  return (
-    <p className="error">
-      <span>⛔</span> {message}
-    </p>
   );
 }
