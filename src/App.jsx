@@ -215,7 +215,22 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     onAddWatched(newMovie);
     onCloseMovie();
   }
-  console.log(title, year);
+
+  useEffect(() => {
+    const callback = (e) => {
+      if (e.code === "Escape") {
+        onCloseMovie();
+        console.log("Escape key was pressed");
+      }
+    };
+
+    document.addEventListener("keydown", callback);
+
+    return () => {
+      document.removeEventListener("keydown", callback);
+    };
+  }, [onCloseMovie]);
+
   useEffect(() => {
     async function getMovieDetails() {
       setIsLoading(true);
